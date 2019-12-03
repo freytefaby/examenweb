@@ -23,6 +23,7 @@ class Login extends Controller {
             if($response["tipoPerfil"]==1){
                 header('location:'.constant('URL').'/administradores');
             }else{
+                $_SESSION["carrito"]=array();
                 header('location:'.constant('URL').'/usuarios');
             }
             

@@ -10,16 +10,19 @@
 
     <body>
         <?php require ('views/header.php') ?>
-        <h4>Catalogo de productos</h4>
-       
-    <form action="<?php echo constant('URL').'/usuarios/buscarproducto' ?>" method="POST"  >
-        <input type="text" name="buscar" placeholder="Buscar por codigo">
-        <input type="submit" value="buscar">
-    
-    </form><br><br>
+        <h4>Agregar al carrito</h4>
+        <?php if(isset($_GET["error"])){
+            if($_GET["error"]==1){
+                echo "<span style='color:red'>Este producto ya se encuentra en el carrito.</span>";
+            }else
+            {
+                echo "<span style='color:red'>Debe ser una cantidad mayor a 0</span>";
+            }
+        } ?>
+       <form method="POST" action="<?php echo constant('URL').'/usuarios/carritoguardar' ?>">
             <?php
             //var_dump($this->productos);
-                foreach($this->productos as $key=> $pro){
+                foreach($this->infop as $key=> $pro){
                     
                     ?>
                         <div style="float:left; margin-right:30px; border:solid 1px;">
@@ -36,7 +39,12 @@
                                 <?php
                                     if($pro->cantidad!=0){
                                         ?>
-                                        <a href="<?php echo constant('URL').'/usuarios/carrito/'.$pro->idproducto ?>">Agregar al carrito</a>
+                                        <input type="hidden" name="producto" value="<?php echo $pro->nombre ?>">
+                                        <input type="hidden" name="id" value="<?php echo $pro->idproducto ?>">
+                                        <input type="hidden" name="precio" value="<?php echo $pro->precio ?>">
+                                        <input type="hidden" name="cantidad_old" value="<?php echo $pro->cantidad ?>">
+                                        <input type="number" name="cantidad" min="1" max="<?php echo $pro->cantidad ?>" placeholder="cantidad"  >
+                                        <input type="submit" value="Agregar" >
                                         <?php
                                     }
                                 ?>
@@ -48,7 +56,7 @@
                 }
             
             ?>
-       
+       </form>
         
        
 

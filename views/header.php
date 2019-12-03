@@ -19,9 +19,10 @@
 <table>
  <tr>
   <td><a href="<?php echo constant('URL') ?>">Login</a></td>
-  <td><a href="<?php echo constant('URL').'/administradores' ?>">carrito</a></td>
-  <td><a href="<?php echo constant('URL').'/administradores/usuarios' ?>">mis compras</a></td>
-  <td><a href="<?php echo constant('URL').'/productos' ?>">Productos</a></td>
+  <td><a href="<?php echo constant('URL').'/usuarios/vercarrito' ?>">carrito[<?php echo count($_SESSION["carrito"]) ?>]</a></td>
+  <td><a href="<?php echo constant('URL').'/usuarios/miscompras' ?>">mis compras</a></td>
+  <td><a href="<?php echo constant('URL').'/usuarios' ?>">catalogo</a></td>
+  <td><a href="#">Mi saldo $<?php echo number_format($_SESSION["user"]["credito"]) ?></a></td>
  </tr>
 </table>
 
